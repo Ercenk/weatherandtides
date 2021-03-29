@@ -51,3 +51,5 @@ typedef enum {
 #define maxChanges 10
 
 #define sectionOffset 8
+
+#define CONFIG_DONE_PIN 13

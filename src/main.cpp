@@ -272,8 +272,6 @@ void getPredictions()
     displayTides(todayString);
 
     displayWeather();
-
-    display.update();
   }
 }
 
@@ -315,6 +313,9 @@ void setupOTA()
 
 void setup()
 {
+  pinMode(CONFIG_DONE_PIN, OUTPUT);
+  digitalWrite(CONFIG_DONE_PIN, LOW);
+
   Serial.begin(115200);
 
   initializeDisplay();
@@ -326,6 +327,7 @@ void setup()
   getPredictions();
 
   display.update();
+
   Serial.println(WiFi.localIP());
   setupOTA();
 }
@@ -333,4 +335,8 @@ void setup()
 void loop()
 {
   ArduinoOTA.handle();
+
+  digitalWrite(CONFIG_DONE_PIN, HIGH);
+  delay(1);
+  digitalWrite(CONFIG_DONE_PIN, LOW);
 }
